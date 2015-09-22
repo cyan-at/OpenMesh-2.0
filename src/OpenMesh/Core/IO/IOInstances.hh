@@ -83,21 +83,29 @@ namespace IO {
 
 //=============================================================================
 
+#if defined(__GNUC__)
+// GCC and clang provide an attribute to avoid unused variable warnings
+#  define OM_UNUSED __attribute__ ((__unused__))
+#else
+// Default to empty define which may leave warnings, but shouldn't cause errors
+#  define OM_UNUSED
+#endif
 
 // Instanciate every Reader module
-static BaseReader* OFFReaderInstance = &OFFReader();
-static BaseReader* OBJReaderInstance = &OBJReader();
-static BaseReader* PLYReaderInstance = &PLYReader();
-static BaseReader* STLReaderInstance = &STLReader();
-static BaseReader* OMReaderInstance  = &OMReader();
+OM_UNUSED static BaseReader* OFFReaderInstance = &OFFReader();
+OM_UNUSED static BaseReader* OBJReaderInstance = &OBJReader();
+OM_UNUSED static BaseReader* PLYReaderInstance = &PLYReader();
+OM_UNUSED static BaseReader* STLReaderInstance = &STLReader();
+OM_UNUSED static BaseReader* OMReaderInstance  = &OMReader();
 
 // Instanciate every writer module
-static BaseWriter* OBJWriterInstance = &OBJWriter();
-static BaseWriter* OFFWriterInstance = &OFFWriter();
-static BaseWriter* STLWriterInstance = &STLWriter();
-static BaseWriter* OMWriterInstance  = &OMWriter();
-static BaseWriter* PLYWriterInstance = &PLYWriter();
+OM_UNUSED static BaseWriter* OBJWriterInstance = &OBJWriter();
+OM_UNUSED static BaseWriter* OFFWriterInstance = &OFFWriter();
+OM_UNUSED static BaseWriter* STLWriterInstance = &STLWriter();
+OM_UNUSED static BaseWriter* OMWriterInstance  = &OMWriter();
+OM_UNUSED static BaseWriter* PLYWriterInstance = &PLYWriter();
 
+#undef OM_UNUSED
 
 //=============================================================================
 } // namespace IO
